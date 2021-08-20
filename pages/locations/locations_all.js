@@ -16,7 +16,7 @@ const AllLocations = ({ totalPages }) => {
   const [changing, setChanging] = useState(false);
   const LOCATIONS = gql`
     query {
-      locations(page: 1) {
+      locations(page: ${pageNumber}) {
         results {
           id
           name

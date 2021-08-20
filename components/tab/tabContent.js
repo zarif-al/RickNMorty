@@ -60,7 +60,7 @@ function TabContent() {
           <Link href="/episodes/episodes_all" passHref>
             <span className={styles.content_card}>
               <Image
-                src="/episodes.png"
+                src="/episode.png"
                 width={520}
                 height={320}
                 priority={true}
@@ -82,7 +82,7 @@ function TabContent() {
                 className={styles.image}
                 alt="locations"
               />
-              <div className={styles.revealHeader}>Checkout The Locations</div>
+              <div className={styles.revealHeader}>The Locations</div>
             </span>
           </Link>
         </motion.div>

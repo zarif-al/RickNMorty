@@ -44,7 +44,8 @@ const AllCharacters = ({ totalPages }) => {
       transition: {
         type: "tween",
         duration: 0.3,
-        delay: 0.5,
+        delayChildren: 0.2,
+        staggerChildren: 0.15,
       },
     }),
     inactive: (direction) => ({
