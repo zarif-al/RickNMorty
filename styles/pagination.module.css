@@ -1,0 +1,53 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  font-family: "Montserrat", sans-serif;
+}
+
+.pagination_footer {
+  display: flex;
+  align-items: center;
+}
+
+.paginationControlDiv {
+  display: flex;
+  margin: 0 0.5rem;
+  align-items: center;
+}
+
+.paginationButtons {
+  cursor: pointer;
+}
+
+.pageInput {
+  width: 60px;
+  height: 25px;
+  text-align: center;
+  margin: 0 0.25rem;
+  padding: 0;
+}
+
+.pageInput,
+.is-invalid {
+  background-image: none !important;
+  padding: 0 !important;
+}
+
+.pageOptions {
+  display: flex;
+  padding: 0 15px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin: 0;
+}
+
+.pageOptions_footer {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  color: white;
+  padding: 12px 15px;
+  margin: 0;
+}

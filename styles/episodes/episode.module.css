@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap");
+.mainContainer {
+  margin-top: calc(clamp(1rem, 2vw, 1.5rem) + 4rem);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header,
+.castHeader {
+  font-family: "Montserrat Alternates", sans-serif;
+  color: greenyellow;
+  text-align: center;
+}
+
+.image {
+  border-radius: 50%;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/*Grid*/
+.charactersGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-content: center;
+  margin: 2rem 0rem;
+  row-gap: 1rem;
+  column-gap: 1.2rem;
+}
+
+@media screen and (max-width: 414px) {
+  .charactersGrid {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    column-gap: 1rem;
+  }
+}
+@media screen and (min-width: 415px) and (max-width: 1280px) {
+  .charactersGrid {
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    column-gap: 1rem;
+  }
+}
+
+/*Card*/
+.cardItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+}
+/*Link*/
+.link {
+  color: white;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  transition: all 500ms;
+  text-align: center;
+}
+
+.cardItem:hover > .link {
+  text-decoration: underline;
+  color: greenyellow;
+}
