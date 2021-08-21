@@ -141,7 +141,7 @@ input[type="number"] {
   min-height: 100vh;
 }
 
-.header {
+.indexHeader {
   font-family: "Creepster", cursive;
   color: greenyellow;
   text-shadow: -3px 0 green, 0 3px green, 3px 0 green, 0 -3px green;
@@ -149,13 +149,13 @@ input[type="number"] {
   margin-top: 0.5rem;
 }
 
-.header > h1 {
+.indexHeader > h1 {
   font-size: 5rem;
   margin-bottom: 0;
 }
 
 @media screen and (max-width: 414px) {
-  .header > h1 {
+  .indexHeader > h1 {
     font-size: 3rem;
   }
 }

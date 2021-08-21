@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <Container className="container" fluid>
       <motion.div
-        className="header"
+        className="indexHeader"
         initial={"hidden"}
         animate={"visible"}
         exit={"exit"}
