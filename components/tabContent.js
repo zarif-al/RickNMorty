@@ -23,7 +23,7 @@ const cardVariant = {
   inactive: (cardNo) => ({
     opacity: 0,
     x: cardNo === 1 ? -50 : cardNo === 2 ? 50 : 0,
-    y: cardNo === 3 ? 50 : 0,
+    y: cardNo === 3 ? 15 : 0,
     transition: {
       duration: 0.3,
     },
@@ -45,7 +45,7 @@ function TabContent() {
             <Link href="/characters/characters_all" passHref>
               <span className="content_card">
                 <Image
-                  src="/characters.png"
+                  src="/characters.jpeg"
                   width={520}
                   height={320}
                   priority={true}
@@ -60,14 +60,14 @@ function TabContent() {
             <Link href="/episodes/episodes_all" passHref>
               <span className="content_card">
                 <Image
-                  src="/episode.png"
+                  src="/episode.jpg"
                   width={520}
                   height={320}
                   priority={true}
                   className="image"
                   alt="episodes"
                 />
-                <div className="revealHeader">Episode Details</div>
+                <div className="revealHeader">All the Episodes</div>
               </span>
             </Link>
           </motion.div>
@@ -77,14 +77,14 @@ function TabContent() {
             <Link href="/locations/locations_all" passHref>
               <span className="content_card">
                 <Image
-                  src="/locations.png"
+                  src="/locations.jpg"
                   width={520}
                   height={320}
                   priority={true}
                   className="image"
                   alt="locations"
                 />
-                <div className="revealHeader">The Locations</div>
+                <div className="revealHeader">Visit the Locations</div>
               </span>
             </Link>
           </motion.div>
