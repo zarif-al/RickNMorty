@@ -44,11 +44,11 @@ function MyApp({ Component, pageProps, router }) {
       </Head>
       <Navigation display={display} activeKey={router.route} />
       <ApolloProvider client={client}>
-        <AnimatePresence exitBeforeEnter>
-          <div className="appDiv">
+        <div className="appDiv">
+          <AnimatePresence exitBeforeEnter>
             <Component {...pageProps} key={router.route} />
-          </div>
-        </AnimatePresence>
+          </AnimatePresence>
+        </div>
       </ApolloProvider>
     </>
   );
