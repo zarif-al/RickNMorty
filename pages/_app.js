@@ -45,9 +45,9 @@ function MyApp({ Component, pageProps, router }) {
       <Navigation display={display} activeKey={router.route} />
       <ApolloProvider client={client}>
         <AnimatePresence exitBeforeEnter>
-          {/*    <div style={{ overflow: "hidden" }}> */}
-          <Component {...pageProps} key={router.route} />
-          {/*    </div> */}
+          <div className="appDiv">
+            <Component {...pageProps} key={router.route} />
+          </div>
         </AnimatePresence>
       </ApolloProvider>
     </>
