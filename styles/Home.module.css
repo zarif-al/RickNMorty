@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  justify-content: center;
 }
 
 .header {
@@ -11,7 +10,7 @@
   color: greenyellow;
   text-shadow: -3px 0 green, 0 3px green, 3px 0 green, 0 -3px green;
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .header > h1 {

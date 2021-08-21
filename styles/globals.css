@@ -1,18 +1,24 @@
-* {
-  --padding-top: calc(clamp(1rem, 2vw, 1.5rem) + 4rem);
-  --header-font: clamp(2rem, 2.5vw, 3rem);
-  --paragraph-font: clamp(1rem, 2.5vw, 1.5rem);
-  --modal-font: clamp(0.7rem, 1.9vw, 1.2rem);
+@import url("https://fonts.googleapis.com/css2?family=Creepster&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap");
+#__next {
+  overflow: hidden;
 }
 
-#__next {
-  background: linear-gradient(to bottom, rgb(0, 0, 0, 0.85) 0%),
-    url("/background1_3.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  overflow: hidden;
+.mainContainer {
+  margin-top: calc(clamp(1rem, 2vw, 1.5rem) + 4rem);
+  min-height: 100vh;
+}
+
+.header,
+.castHeader {
+  font-family: "Montserrat Alternates", sans-serif;
+  color: greenyellow;
+  text-align: center;
+}
+
+.link {
+  color: lightblue;
 }
 
 body {
@@ -20,6 +26,14 @@ body {
   margin: 0;
   position: relative;
   background-color: transparent;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.925) 0%),
+    url("/background1_3.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  scrollbar-color: white black;
+  scrollbar-width: thin;
 }
 
 html {
@@ -51,4 +65,71 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+/*Loading Div*/
+.loadingDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  margin-top: 3rem;
+}
+
+.errorDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  margin-top: 3rem;
+  background-color: rgba(7, 0, 0, 0.815);
+  border: 2px solid red;
+}
+
+.errorHeader {
+  font-size: clamp(2rem, 1.5vw, 2.5rem);
+  color: red;
+  font-family: "Roboto", sans-serif;
+}
+
+.errorMessages {
+  font-size: clamp(1.5rem, 1vw, 2rem);
+  margin: 0.5rem;
+  text-align: center;
+  color: red;
+  font-family: "Roboto", sans-serif;
+}
+
+/*Spinner*/
+.spinner {
+  width: 7rem;
+  height: 7rem;
+  color: greenyellow;
+}
+
+@media screen and (max-width: 360px) {
+  .loadingDiv,
+  .errorDiv {
+    height: 400px;
+  }
+}
+
+@media screen and (min-width: 361px) and (max-width: 375px) {
+  .loadingDiv,
+  .errorDiv {
+    height: 350px;
+  }
+}
+
+@media screen and (min-width: 376px) and (max-width: 414px) {
+  .loadingDiv,
+  .errorDiv {
+    height: 350px;
+  }
+}
+
+/*Table*/
+.table {
+  margin-top: 1rem;
 }

@@ -1,32 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Creepster&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-.mainContainer {
-  margin-top: calc(clamp(1rem, 2vw, 1.5rem) + 4rem);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.header {
-  font-family: "Creepster", cursive;
-  color: greenyellow;
-  text-align: center;
-}
-
 .image {
   border-radius: 50%;
 }
-
-/* .table {
-  background-color: rgba(106, 189, 28, 0.795);
-  border-color: green;
-  font-family: "Roboto", sans-serif;
-}
-
-.link > a {
-  color: black;
-} */
 
 .imageContainer {
   display: flex;

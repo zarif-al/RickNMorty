@@ -1,17 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
+
 .cards {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  justify-items: center;
-  align-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
 }
 
-@media screen and (min-width: 1280px) {
-  .cards {
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    justify-items: center;
-  }
+.cards > div:nth-child(1) {
+  display: flex;
 }
 
 .image {

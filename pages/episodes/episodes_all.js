@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import client from "../../apollo-client";
 import { Container, Row } from "react-bootstrap";
-import styles from "../../styles/episodes/episodes_all.module.css";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Pagination from "../../components/pagination";
@@ -32,17 +31,15 @@ const AllEpisodes = ({ totalPages }) => {
       setChanging(false);
     }, 400);
   }
-  const tabContentVariant2 = {
+  const tableVariant = {
     active: (direction) => ({
       opacity: 1,
       x: [direction === 0 ? 0 : direction > 0 ? 50 : -50, 0],
-      display: "flex",
+      display: "block",
       transition: {
         type: "tween",
-        duration: 0.5,
-        delay: 0.5,
-        /*      delayChildren: 0.5,
-        staggerChildren: 0.5, */
+        duration: 0.3,
+        delay: 0.4,
       },
     }),
     inactive: (direction) => ({
@@ -58,21 +55,8 @@ const AllEpisodes = ({ totalPages }) => {
     }),
     exit: { opacity: 0 },
   };
-  const table = {
-    active: {
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-      },
-    },
-    inactive: {
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
   return (
-    <Container className={styles.mainContainer}>
+    <Container className="mainContainer">
       <motion.div
         initial={"hidden"}
         animate={"visible"}
@@ -92,14 +76,14 @@ const AllEpisodes = ({ totalPages }) => {
             visible: {
               opacity: 1,
               transition: {
-                duration: 1,
+                duration: 0.5,
               },
             },
             hidden: { opacity: 0 },
             exit: { opacity: 0 },
           }}
         >
-          <h1 className={styles.header}>All Episodes</h1>
+          <h1 className="header">All Episodes</h1>
         </motion.div>
         <Pagination
           pageNumber={pageNumber}
@@ -111,32 +95,27 @@ const AllEpisodes = ({ totalPages }) => {
           setDirection={setDirection}
         />
         {loading ? (
-          <div className={styles.loadingDiv}>
-            <Spinner
-              animation="border"
-              role="status"
-              className={styles.spinner}
-            >
+          <div className="loadingDiv">
+            <Spinner animation="border" role="status" className="spinner">
               <span className="visually-hidden">Loading...</span>
             </Spinner>
           </div>
         ) : error ? (
-          <div className={styles.errorDiv}>
-            <h1 className={styles.errorHeader}>Error</h1>
+          <div className="errorDiv">
+            <h1 className="errorHeader">Error</h1>
             {error.networkError.result.errors.map(({ message }, i) => (
-              <span key={i} className={styles.errorMessages}>
+              <span key={i} className="errorMessages">
                 {message}
               </span>
             ))}
           </div>
         ) : (
           <motion.div
-            variants={tabContentVariant2}
+            variants={tableVariant}
             initial="inactive"
             custom={direction}
             animate={changing ? "inactive" : "active"}
             exit="exit"
-            className={styles.table}
           >
             <Table striped bordered hover variant="dark">
               <thead>
@@ -155,7 +134,7 @@ const AllEpisodes = ({ totalPages }) => {
                           href={`/episodes/episode/?id=${episode.id}`}
                           passHref
                         >
-                          <a>{episode.name}</a>
+                          <a className="link">{episode.name}</a>
                         </Link>
                       </td>
                     </tr>

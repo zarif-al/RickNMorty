@@ -1,19 +1,21 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
 import Head from "next/head";
-import Navigation from "../components/nav/Navigation.js";
+import Navigation from "../components/Navigation.js";
 import { AnimatePresence } from "framer-motion";
-import Router from "next/router";
 import { ApolloProvider } from "@apollo/client";
 import client from "../apollo-client";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 config.autoAddCss = false;
+// Start of Fix - https://github.com/vercel/next.js/issues/17464
+import Router from "next/router";
 const routeChange = () => {
   // Temporary fix to avoid flash of unstyled content
   // during route transitions. Keep an eye on this
   // issue and remove this code when resolved:
   // https://github.com/vercel/next.js/issues/17464
+
   const tempFix = () => {
     const allStyleElems = document.querySelectorAll('style[media="x"]');
     allStyleElems.forEach((elem) => {
@@ -22,6 +24,7 @@ const routeChange = () => {
   };
   tempFix();
 };
+
 Router.events.on("routeChangeComplete", routeChange);
 Router.events.on("routeChangeStart", routeChange);
 // End Of Fix
@@ -41,8 +44,10 @@ function MyApp({ Component, pageProps, router }) {
       </Head>
       <Navigation display={display} activeKey={router.route} />
       <ApolloProvider client={client}>
-        <AnimatePresence exitBeforeEnter activeKey={router.route}>
+        <AnimatePresence exitBeforeEnter>
+          {/*    <div style={{ overflow: "hidden" }}> */}
           <Component {...pageProps} key={router.route} />
+          {/*    </div> */}
         </AnimatePresence>
       </ApolloProvider>
     </>

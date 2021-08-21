@@ -1,3 +1,4 @@
+import styles from "../styles/pagination.module.css";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -5,7 +6,6 @@ import {
   faArrowCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
 import Form from "react-bootstrap/Form";
-import styles from "../styles/pagination.module.css";
 import { motion } from "framer-motion";
 function Pagination({
   pageNumber,
@@ -22,7 +22,7 @@ function Pagination({
         visible: {
           opacity: 1,
           transition: {
-            duration: 1,
+            duration: 0.5,
             delay: 0.4,
           },
         },
@@ -72,7 +72,19 @@ function Pagination({
                     parseInt(e.target.value) > 0 &&
                     parseInt(e.target.value) <= totalPages
                   ) {
-                    setPageNumber(parseInt(e.target.value));
+                    if (parseInt(e.target.value) > pageNumber) {
+                      setDirection(1);
+                      change();
+                      setTimeout(() => {
+                        setPageNumber(parseInt(e.target.value));
+                      }, 400);
+                    } else {
+                      setDirection(-1);
+                      change();
+                      setTimeout(() => {
+                        setPageNumber(parseInt(e.target.value));
+                      }, 400);
+                    }
                   }
                 }
               }}

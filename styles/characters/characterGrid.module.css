@@ -1,29 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap");
-.mainContainer {
-  margin-top: calc(clamp(1rem, 2vw, 1.5rem) + 4rem);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.header,
-.castHeader {
-  font-family: "Montserrat Alternates", sans-serif;
-  color: greenyellow;
-  text-align: center;
-}
-
-.image {
-  border-radius: 50%;
-}
-
-.imageContainer {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap");
 /*Grid*/
 .charactersGrid {
   display: grid;
@@ -57,9 +32,10 @@
   color: white;
   cursor: pointer;
 }
+
 /*Link*/
 .link {
-  color: white;
+  color: greenyellow;
   text-decoration: none;
   font-family: "Montserrat", sans-serif;
   transition: all 500ms;
@@ -68,5 +44,10 @@
 
 .cardItem:hover > .link {
   text-decoration: underline;
-  color: greenyellow;
+  color: green;
+}
+
+/*card image*/
+.image {
+  border-radius: 50%;
 }

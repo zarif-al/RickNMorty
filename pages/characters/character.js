@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { gql } from "@apollo/client";
 import styles from "../../styles/characters/character.module.css";
 import client from "../../apollo-client";
@@ -7,9 +7,6 @@ import { motion } from "framer-motion";
 import { Container } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import Link from "next/link";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faBars } from "@fortawesome/free-solid-svg-icons";
 const Character = ({ data }) => {
   const character = data.character;
   const main = {
@@ -71,7 +68,7 @@ const Character = ({ data }) => {
     },
   };
   return (
-    <Container className={styles.mainContainer}>
+    <Container className="mainContainer">
       <motion.div
         variants={main}
         initial="inactive"
@@ -91,19 +88,12 @@ const Character = ({ data }) => {
           </div>
         </motion.div>
         <motion.div variants={header}>
-          <div className={styles.header}>
+          <div className="header">
             <h1>{character.name}</h1>
           </div>
         </motion.div>
         <motion.div variants={table}>
-          <Table
-            striped
-            bordered
-            hover
-            variant="dark"
-            size="sm"
-            className={styles.table}
-          >
+          <Table striped bordered hover variant="dark">
             <tbody>
               <tr>
                 <th>Status</th>
@@ -123,16 +113,37 @@ const Character = ({ data }) => {
               </tr>
               <tr>
                 <th>Origin</th>
-                <td>{character.origin.name}</td>
+                <td>
+                  <Link
+                    href={`/locations/location/?id=${character.origin.id}`}
+                    passHref
+                  >
+                    <a className="link">{character.origin.name}</a>
+                  </Link>
+                </td>
+              </tr>
+              <tr>
+                <th>Last Known Location</th>
+                <td>
+                  <Link
+                    href={`/locations/location/?id=${character.location.id}`}
+                    passHref
+                  >
+                    <a className="link">{character.location.name}</a>
+                  </Link>
+                </td>
               </tr>
               <tr>
                 <th>Episode(s)</th>
                 <td>
                   {character.episode.map((episode, index) => {
                     return (
-                      <span key={index} className={styles.link}>
-                        <Link href={`/episodes/episode/?id=${episode.id}`}>
-                          {episode.name}
+                      <span key={index}>
+                        <Link
+                          href={`/episodes/episode/?id=${episode.id}`}
+                          passHref
+                        >
+                          <a className="link">{episode.name}</a>
                         </Link>
                         {index != character.episode.length - 1 ? ", " : ""}
                       </span>
@@ -141,8 +152,8 @@ const Character = ({ data }) => {
                 </td>
               </tr>
               <tr>
-                <th>Created</th>
-                <td>{character.created}</td>
+                <th>Database Entry</th>
+                <td>{new Date(character.created).toUTCString()}</td>
               </tr>
             </tbody>
           </Table>

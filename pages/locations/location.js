@@ -1,70 +1,99 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { gql } from "@apollo/client";
-import styles from "../../styles/episodes/episode.module.css";
 import client from "../../apollo-client";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Container } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
-import Link from "next/link";
+import CharacterGrid from "../../components/characterGrid";
 const Location = ({ data }) => {
   const location = data.location;
-  const generateTable = () => {
-    const rows = [];
-    for (const [key, value] of Object.entries(data.character)) {
-      if (key != "episode" && key != "origin" && key != "location") {
-        console.log(`${key}: ${value}`);
-        rows.push(
-          <tr>
-            <th>{key}</th>
-            <td>{value}</td>
-          </tr>
-        );
-      }
-    }
-    return rows;
+  const main = {
+    active: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.5,
+        staggerChildren: 0.3,
+      },
+    },
+    inactive: { opacity: 0 },
+  };
+  const header = {
+    active: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+    inactive: {
+      opacity: 0,
+      y: 10,
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+  const table = {
+    active: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+    inactive: {
+      opacity: 0,
+      y: 10,
+      transition: {
+        duration: 0.3,
+      },
+    },
   };
   return (
-    <Container>
-      <Table striped bordered hover variant="dark">
-        <tbody>
-          <tr>
-            <th>Name</th>
-            <td>{location.name}</td>
-          </tr>
-          <tr>
-            <th>Type</th>
-            <td>{location.type}</td>
-          </tr>
-          <tr>
-            <th>Dimension</th>
-            <td>{location.dimension}</td>
-          </tr>
-          <tr>
-            <th>Characters</th>
-            <td>
-              {location.residents.map((character, index) => {
-                return (
-                  <span key={index}>
-                    <Link href={`/characters/character/?id=${character.id}`}>
-                      {character.name}
-                    </Link>
-                    {index != location.residents.length - 1 ? ", " : ""}
-                  </span>
-                );
-              })}
-            </td>
-          </tr>
-          <tr>
-            <th>Created</th>
-            <td>{location.created}</td>
-          </tr>
-          <tr>
-            <th>Created</th>
-            <td>{location.created.split("T")[0]}</td>
-          </tr>
-        </tbody>
-      </Table>
+    <Container className="mainContainer">
+      <motion.div
+        variants={main}
+        initial="inactive"
+        animate="active"
+        exit="inactive"
+        style={{ width: "100%" }}
+      >
+        <motion.div variants={header}>
+          <div className="header">
+            <h1>{location.name}</h1>
+          </div>
+        </motion.div>
+        <motion.div variants={table}>
+          <Table striped bordered hover variant="dark">
+            <tbody>
+              <tr>
+                <th>Type</th>
+                <td>{location.type}</td>
+              </tr>
+              <tr>
+                <th>Dimension</th>
+                <td>{location.dimension}</td>
+              </tr>
+              <tr>
+                <th>Database Entry</th>
+                <td>{new Date(location.created).toUTCString()}</td>
+              </tr>
+            </tbody>
+          </Table>
+        </motion.div>
+        {location.residents.length != 0 ? (
+          <>
+            <motion.div className="castHeader" variants={header}>
+              <h1>Residents</h1>
+            </motion.div>
+            <CharacterGrid characters={location.residents} source="location" />
+          </>
+        ) : (
+          <motion.div className="castHeader" variants={header}>
+            <h1>This location is uninhabited!</h1>
+          </motion.div>
+        )}
+      </motion.div>
     </Container>
   );
 };
@@ -80,7 +109,9 @@ export async function getServerSideProps(context) {
           type
           dimension
           residents {
+            id
             name
+            image
           }
           created
         }
