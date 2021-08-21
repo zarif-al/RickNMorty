@@ -171,6 +171,12 @@ input[type="number"] {
   display: flex;
 }
 
+@media screen and (max-width: 834px) {
+  .cards > div:nth-child(1) {
+    flex-direction: column;
+  }
+}
+
 .image {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
