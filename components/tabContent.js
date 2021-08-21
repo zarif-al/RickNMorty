@@ -1,4 +1,3 @@
-import styles from "../styles/TabContent.module.css";
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -40,35 +39,35 @@ function TabContent() {
       animate="active"
       exit="inactive"
     >
-      <div className={styles.cards}>
+      <div className="cards">
         <div>
           <motion.div variants={cardVariant} custom={1}>
             <Link href="/characters/characters_all" passHref>
-              <span className={styles.content_card}>
+              <span className="content_card">
                 <Image
                   src="/characters.png"
                   width={520}
                   height={320}
                   priority={true}
                   alt="Rick and Morty Characters"
-                  className={styles.image}
+                  className="image"
                 />
-                <div className={styles.revealHeader}>Meet the Cast</div>
+                <div className="revealHeader">Meet the Cast</div>
               </span>
             </Link>
           </motion.div>
           <motion.div variants={cardVariant} custom={2}>
             <Link href="/episodes/episodes_all" passHref>
-              <span className={styles.content_card}>
+              <span className="content_card">
                 <Image
                   src="/episode.png"
                   width={520}
                   height={320}
                   priority={true}
-                  className={styles.image}
+                  className="image"
                   alt="episodes"
                 />
-                <div className={styles.revealHeader}>Episode Details</div>
+                <div className="revealHeader">Episode Details</div>
               </span>
             </Link>
           </motion.div>
@@ -76,16 +75,16 @@ function TabContent() {
         <div>
           <motion.div variants={cardVariant} custom={3}>
             <Link href="/locations/locations_all" passHref>
-              <span className={styles.content_card}>
+              <span className="content_card">
                 <Image
                   src="/locations.png"
                   width={520}
                   height={320}
                   priority={true}
-                  className={styles.image}
+                  className="image"
                   alt="locations"
                 />
-                <div className={styles.revealHeader}>The Locations</div>
+                <div className="revealHeader">The Locations</div>
               </span>
             </Link>
           </motion.div>

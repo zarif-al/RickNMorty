@@ -1,9 +1,7 @@
-import Head from "next/head";
-import Image from "next/image";
 import Container from "react-bootstrap/Container";
 import { motion } from "framer-motion";
 import TabContent from "../components/tabContent";
-import React, { useState } from "react";
+import React from "react";
 export default function Home() {
   return (
     <Container className="container" fluid>
