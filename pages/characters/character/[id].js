@@ -1,7 +1,7 @@
 import React from "react";
 import { gql } from "@apollo/client";
-import styles from "../../styles/characters/character.module.css";
-import client from "../../apollo-client";
+import styles from "../../../styles/characters/character.module.css";
+import client from "../../../apollo-client";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Container } from "react-bootstrap";
@@ -118,7 +118,7 @@ const Character = ({ data }) => {
                     character.origin.name
                   ) : (
                     <Link
-                      href={`/locations/location/?id=${character.origin.id}`}
+                      href={`/locations/location/${character.origin.id}`}
                       passHref
                     >
                       <a className="link">{character.origin.name}</a>
@@ -133,7 +133,7 @@ const Character = ({ data }) => {
                     character.location.name
                   ) : (
                     <Link
-                      href={`/locations/location/?id=${character.location.id}`}
+                      href={`/locations/location/${character.location.id}`}
                       passHref
                     >
                       <a className="link">{character.location.name}</a>
@@ -147,10 +147,7 @@ const Character = ({ data }) => {
                   {character.episode.map((episode, index) => {
                     return (
                       <span key={index}>
-                        <Link
-                          href={`/episodes/episode/?id=${episode.id}`}
-                          passHref
-                        >
+                        <Link href={`/episodes/episode/${episode.id}`} passHref>
                           <a className="link">{episode.name}</a>
                         </Link>
                         {index != character.episode.length - 1 ? ", " : ""}
@@ -172,12 +169,36 @@ const Character = ({ data }) => {
 };
 
 export default Character;
-export async function getServerSideProps(context) {
-  const { id } = context.query;
+export async function getStaticPaths() {
   const { data } = await client.query({
     query: gql`
       query {
-        character(id: ${id}) {
+        characters(page: 1) {
+          info {
+            count
+            pages
+          }
+        }
+      }
+    `,
+  });
+
+  const count = Number(data.characters.info.count);
+  let paths = [];
+  for (var i = 1; i <= count; i++) {
+    paths.push({ params: { id: i.toString() } });
+  }
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const { data } = await client.query({
+    query: gql`
+      query {
+        character(id: ${params.id}) {
           id
           name
           status

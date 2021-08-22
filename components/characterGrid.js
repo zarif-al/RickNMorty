@@ -63,7 +63,7 @@ const CharacterGrid = ({ characters, direction, changing, source }) => {
     const characterCards = characters.map((character, index) => {
       return (
         <motion.div key={index} variants={cardVariant}>
-          <Link href={`/characters/character/?id=${character.id}`} passHref>
+          <Link href={`/characters/character/${character.id}`} passHref>
             <span className={styles.cardItem}>
               <Image
                 src={character.image}

@@ -1,12 +1,12 @@
 import React from "react";
 import { gql } from "@apollo/client";
-import client from "../../apollo-client";
+import client from "../../../apollo-client";
 import { motion } from "framer-motion";
 import { Container } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
-import CharacterGrid from "../../components/characterGrid";
-const Location = ({ data }) => {
-  const location = data.location;
+import CharacterGrid from "../../../components/characterGrid";
+const Episode = ({ data }) => {
+  const episode = data.episode;
   const main = {
     active: {
       opacity: 1,
@@ -60,55 +60,72 @@ const Location = ({ data }) => {
       >
         <motion.div variants={header}>
           <div className="header">
-            <h1>{location.name}</h1>
+            <h1>{episode.name}</h1>
           </div>
         </motion.div>
         <motion.div variants={table}>
           <Table striped bordered hover variant="dark">
             <tbody>
               <tr>
-                <th>Type</th>
-                <td>{location.type}</td>
+                <th>Air Date</th>
+                <td>{episode.air_date}</td>
               </tr>
               <tr>
-                <th>Dimension</th>
-                <td>{location.dimension}</td>
+                <th>Episode</th>
+                <td>{episode.episode}</td>
               </tr>
               <tr>
                 <th>Database Entry</th>
-                <td>{new Date(location.created).toUTCString()}</td>
+                <td>{new Date(episode.created).toUTCString()}</td>
               </tr>
             </tbody>
           </Table>
         </motion.div>
-        {location.residents.length != 0 ? (
-          <>
-            <motion.div className="castHeader" variants={header}>
-              <h1>Residents</h1>
-            </motion.div>
-            <CharacterGrid characters={location.residents} source="location" />
-          </>
-        ) : (
-          <motion.div className="castHeader" variants={header}>
-            <h1>This location is uninhabited!</h1>
-          </motion.div>
-        )}
+        <motion.div className="castHeader" variants={header}>
+          <h3>Characters seen in this Episode</h3>
+        </motion.div>
+        <CharacterGrid characters={episode.characters} source="episode" />
       </motion.div>
     </Container>
   );
 };
 
-export default Location;
-export async function getServerSideProps(context) {
-  const { id } = context.query;
+export default Episode;
+export async function getStaticPaths() {
   const { data } = await client.query({
     query: gql`
       query {
-        location(id: ${id}) {
+        episodes(page: 1) {
+          info {
+            count
+            pages
+          }
+        }
+      }
+    `,
+  });
+
+  const count = Number(data.episodes.info.count);
+  let paths = [];
+  for (var i = 1; i <= count; i++) {
+    paths.push({ params: { id: i.toString() } });
+  }
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const { data } = await client.query({
+    query: gql`
+      query {
+        episode(id: ${params.id}) {
+          id
           name
-          type
-          dimension
-          residents {
+          air_date
+          episode
+          characters {
             id
             name
             image
