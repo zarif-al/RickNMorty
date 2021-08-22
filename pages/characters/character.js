@@ -172,7 +172,63 @@ const Character = ({ data }) => {
 };
 
 export default Character;
-export async function getServerSideProps(context) {
+export async function getStaticPaths() {
+  const { data } = await client.query({
+    query: gql`
+      query {
+        characters(page: 1) {
+          info {
+            count
+            pages
+          }
+        }
+      }
+    `,
+  });
+
+  const count = Number(data.characters.info.count);
+  let paths = [];
+  for (var i = 1; i <= count; i++) {
+    paths.push({ params: { character: i } });
+  }
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const { data } = await client.query({
+    query: gql`
+      query {
+        character(id: ${params.character}) {
+          id
+          name
+          status
+          species
+          type
+          gender
+          origin {
+            id
+            name
+          }
+          location {
+            id
+            name
+          }
+          image
+          episode {
+            id
+            name
+          }
+          created
+        }
+      }
+    `,
+  });
+  return { props: { data } };
+}
+/* export async function getServerSideProps(context) {
   const { id } = context.query;
   const { data } = await client.query({
     query: gql`
@@ -203,4 +259,4 @@ export async function getServerSideProps(context) {
     `,
   });
   return { props: { data } };
-}
+} */
