@@ -114,23 +114,31 @@ const Character = ({ data }) => {
               <tr>
                 <th>Origin</th>
                 <td>
-                  <Link
-                    href={`/locations/location/?id=${character.origin.id}`}
-                    passHref
-                  >
-                    <a className="link">{character.origin.name}</a>
-                  </Link>
+                  {character.origin.id == null ? (
+                    character.origin.name
+                  ) : (
+                    <Link
+                      href={`/locations/location/?id=${character.origin.id}`}
+                      passHref
+                    >
+                      <a className="link">{character.origin.name}</a>
+                    </Link>
+                  )}
                 </td>
               </tr>
               <tr>
                 <th>Last Known Location</th>
                 <td>
-                  <Link
-                    href={`/locations/location/?id=${character.location.id}`}
-                    passHref
-                  >
-                    <a className="link">{character.location.name}</a>
-                  </Link>
+                  {character.location.id === null ? (
+                    character.location.name
+                  ) : (
+                    <Link
+                      href={`/locations/location/?id=${character.location.id}`}
+                      passHref
+                    >
+                      <a className="link">{character.location.name}</a>
+                    </Link>
+                  )}
                 </td>
               </tr>
               <tr>
