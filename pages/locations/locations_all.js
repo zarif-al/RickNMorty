@@ -132,7 +132,7 @@ const AllLocations = ({ totalPages }) => {
                       <td>{location.id}</td>
                       <td>
                         <Link
-                          href={`/locations/location/?id=${location.id}`}
+                          href={`/locations/location/${location.id}`}
                           passHref
                         >
                           <a className="link">{location.name}</a>

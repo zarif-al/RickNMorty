@@ -130,10 +130,7 @@ const AllEpisodes = ({ totalPages }) => {
                     <tr key={index}>
                       <td>{episode.episode}</td>
                       <td>
-                        <Link
-                          href={`/episodes/episode/?id=${episode.id}`}
-                          passHref
-                        >
+                        <Link href={`/episodes/episode/${episode.id}`} passHref>
                           <a className="link">{episode.name}</a>
                         </Link>
                       </td>
